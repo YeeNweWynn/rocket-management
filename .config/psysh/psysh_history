@@ -1,0 +1,6 @@
+Http::withHeaders(["x-api-key" => "API_KEY_1"])->get('http://rocketapp:5000/rockets');
+$resp = Http::withHeaders(["x-api-key" => "API_KEY_1"])->get('http://rocketapp:5000/rockets');
+$resp->json()
+exit
+$a = new App\Services\RocketSDK()
+$a->getRockets();
