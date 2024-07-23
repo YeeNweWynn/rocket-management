@@ -83,7 +83,7 @@ const todayDate = computed(() => {
 
 const temperatureData = computed(() => {
     return weatherTimes.value.temperature
-        ? `${weatherTimes.value.temperature.toFixed(1)}°C`
+        ? `${weatherTimes.value.temperature.toFixed(0)}°C`
         : "N/A";
 });
 const humidityData = computed(() => {
@@ -93,12 +93,12 @@ const humidityData = computed(() => {
 });
 const pressureData = computed(() => {
     return weatherTimes.value.pressure !== undefined
-        ? `${weatherTimes.value.pressure.toFixed(0)} hPa`
+        ? `${weatherTimes.value.pressure.toFixed(0)} MPH`
         : "N/A";
 });
 const windData = computed(() => {
     return weatherTimes.value.wind?.speed !== undefined
-        ? `${weatherTimes.value.wind.speed.toFixed(1)} km/h`
+        ? `${weatherTimes.value.wind.speed.toFixed(1)} MPH`
         : "N/A";
 });
 const precipitationData = computed(() => {
@@ -122,17 +122,17 @@ const precipitationDescription = computed(() => {
 });
 const windAngel = computed(() => {
     return weatherTimes.value.wind?.angle !== undefined
-        ? `${weatherTimes.value.wind.angle.toFixed(0)}`
+        ? Number(weatherTimes.value.wind.angle.toFixed(0))
         : 0;
 });
 </script>
 
 <style scoped>
 .weather-container {
-    max-width: 300px; /* Adjust as needed */
+    max-width: 300px;
 }
 .card {
-    background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
-    backdrop-filter: blur(10px); /* Blur effect for background */
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
 }
 </style>
