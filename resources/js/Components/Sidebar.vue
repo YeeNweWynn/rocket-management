@@ -16,7 +16,7 @@ export default {
     data() {
         return {
             menuItems: [
-                { name: "Rocket Overview", link: "/rocket" },
+                { name: "Rocket", link: "/dashboard" },
                 { name: "Settings", link: "/settings" },
             ],
         };
@@ -28,8 +28,8 @@ export default {
 .sidebar {
     background-color: #2d3748;
     color: white;
-    height: 100vh;
     padding: 1rem;
+    margin-bottom: 20px;
 }
 
 .menu {

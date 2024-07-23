@@ -13,10 +13,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/rocket', function () {
-    return Inertia::render('RocketOverview');
-})->name('rocket');
-
 Route::get('/settings', function () {
     return Inertia::render('Settings');
 })->name('settings');
