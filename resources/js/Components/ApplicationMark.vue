@@ -1,3 +1,3 @@
 <template>
-    <i class="fa-solid fa-rocket fa-3x"></i>
+    <img src="/images/rocket-sharp.svg" alt="Logo" class="h-12 w-auto" />
 </template>

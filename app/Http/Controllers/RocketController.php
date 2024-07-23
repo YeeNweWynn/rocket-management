@@ -23,6 +23,7 @@ class RocketController extends Controller
             return response()->json(['error' => $e->getMessage()], 401);
         }
     }
+    
     public function updateRocketStatus($id)
     {
         try {

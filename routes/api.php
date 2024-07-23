@@ -13,3 +13,4 @@ Route::get('/user', function (Request $request) {
 Route::get('/rocket-overview', [RocketController::class, 'getOverviewData']);
 Route::get('/weather', [WeatherController::class, 'getWeatherData']);
 Route::put('/rocket/{id}/status/launched', [RocketController::class, 'updateRocketStatus']);
+Route::delete('/rocket/{id}/status/launched', [RocketController::class, 'updateRocketStatus']);
