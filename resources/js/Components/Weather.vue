@@ -3,7 +3,6 @@
         class="weather-container w-1/5 mt-4 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg shadow-lg p-6 mb-4"
     >
         <div class="text-white text-base font-bold">Weather</div>
-
         <div class="text-white text-xs">{{ location }} , {{ todayDate }}</div>
         <div
             class="bg-white/20 rounded-xl p-4 mt-4 text-right backdrop-blur-md"
@@ -56,7 +55,6 @@ import axios from "axios";
 import WeatherCard from "@/Components/WeatherCard.vue";
 
 const weatherTimes = ref({});
-
 const location = "Bangkok, Thailand";
 
 const fetchWeatherData = async () => {

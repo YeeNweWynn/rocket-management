@@ -17,7 +17,12 @@
                             All rockets
                         </p>
                     </div>
-                    <div class="slide-menu flex overflow-x-scroll space-x-4">
+                    <LoadingIndicator :isLoading="loading" />
+
+                    <div
+                        class="slide-menu flex overflow-x-scroll space-x-4"
+                        v-if="!loading"
+                    >
                         <div
                             v-for="rocket in rockets"
                             :key="rocket.id"
@@ -42,7 +47,10 @@
                         </div>
                     </div>
                 </div>
-                <RocketDetails :selectedRocket="selectedRocket" />
+                <RocketDetails
+                    v-if="selectedRocket"
+                    :selectedRocket="selectedRocket"
+                />
             </div>
             <Weather />
         </div>
@@ -52,28 +60,32 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import LoadingIndicator from "@/Components/LoadingIndicator.vue";
 import Weather from "@/Components/Weather.vue";
 import RocketDetails from "@/Pages/RocketDetails.vue";
 
 const rockets = ref([]);
 const selectedRocketId = ref(null);
 const selectedRocket = ref(null);
+const loading = ref(false);
 
 const fetchRocketData = async () => {
     try {
+        loading.value = true;
         const response = await axios.get("/api/rocket-overview");
         rockets.value = response.data;
         if (rockets.value.length > 0) {
             selectRocket(rockets.value[0]);
             selectedRocketId.value = rockets.value[0].id;
         }
+        loading.value = false;
     } catch (error) {
         console.error("Error fetching rocket data:", error);
     }
 };
-
 const selectRocket = (rocket) => {
     selectedRocket.value = rocket;
+    selectedRocketId.value = rocket.id;
 };
 
 const getStatusClass = (status) => {

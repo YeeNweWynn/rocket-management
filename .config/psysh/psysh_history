@@ -4,3 +4,10 @@ $resp->json()
 exit
 $a = new App\Services\RocketSDK()
 $a->getRockets();
+$a = new getWeather()
+$a = new WeatherSDK();
+$a = new App\Services\WeatherSDK;
+$a->getWeather();
+$a->getWeather();
+$b = new App\Services\RocketSDK;
+$b->getRockets();

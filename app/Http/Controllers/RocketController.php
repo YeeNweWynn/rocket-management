@@ -23,12 +23,22 @@ class RocketController extends Controller
             return response()->json(['error' => $e->getMessage()], 401);
         }
     }
-    
+
     public function updateRocketStatus($id)
     {
         try {
             $this->rocketSDK->updateRocketStatus($id);
             return response()->json(['message' => 'Rocket status updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+    }
+
+    public function cancelRocket($id)
+    {
+        try {
+            $this->rocketSDK->cancelRocket($id);
+            return response()->json(['message' => 'Successfully cancelled rocket.']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 401);
         }

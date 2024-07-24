@@ -72,19 +72,31 @@
                 <div class="mt-4 card-actions justify-center space-x-4">
                     <button
                         class="btn btn-wide btn-neutral"
-                        @click="updateStatus(selectedRocket?.id, 'deployed')"
+                        :disabled="
+                            isLaunching ||
+                            selectedRocket?.status === 'launched' ||
+                            selectedRocket?.status === 'deployed'
+                        "
+                        :loading="isLaunching"
+                        @click="updateStatus('launched')"
+                    >
+                        Launch
+                    </button>
+                    <button
+                        class="btn btn-wide btn-neutral"
+                        :disabled="
+                            (!isLaunched &&
+                                selectedRocket?.status !== 'launched') ||
+                            isDeploying
+                        "
+                        :loading="isDeploying"
+                        @click="updateStatus('deployed')"
                     >
                         Deploy
                     </button>
                     <button
                         class="btn btn-wide btn-outline"
-                        @click="updateStatus(selectedRocket?.id, 'launched')"
-                    >
-                        Launch
-                    </button>
-                    <button
-                        class="btn btn-wide btn-outline"
-                        @click="cancelRocket(selectedRocket?.id)"
+                        @click="cancelRocket()"
                     >
                         Cancel
                     </button>
@@ -93,28 +105,55 @@
         </div>
     </div>
 </template>
+
 <script setup>
+import { ref } from "vue";
 import { formatDate } from "@/Utils/dateUtils.js";
 import axios from "axios";
 
 const props = defineProps({
     selectedRocket: Object,
 });
-const updateStatus = async (rocketId, status) => {
+
+const isLaunching = ref(false);
+const isDeploying = ref(false);
+const isLaunched = ref(false);
+
+const updateStatus = async (status) => {
+    if (status === "launched") {
+        isLaunching.value = true;
+    } else if (status === "deployed") {
+        isDeploying.value = true;
+    }
+
     try {
-        await axios.put(`/api/rocket/${rocketId}/status/launched`);
-        alert(`Rocket ${rocketId} ${status} successfully!`);
+        await axios.put(
+            `/api/rocket/${props.selectedRocket.id}/status/launched`
+        );
+        alert(`Rocket ${props.selectedRocket.id} ${status} successfully!`);
+        if (status === "launched") {
+            isLaunched.value = true;
+        }
     } catch (error) {
         console.error("Error", error);
-        alert("Failed to update the status.");
+        alert(`Failed to ${status} the rocket.`);
+    } finally {
+        if (status === "launched") {
+            isLaunching.value = false;
+        } else if (status === "deployed") {
+            isDeploying.value = false;
+        }
     }
 };
-const cancelRocket = async (rocketId) => {
+
+const cancelRocket = async () => {
     try {
-        await axios.delete(`/api/rocket/${rocketId}/status/launched`);
-        alert(`Rocket ${rocketId} cancelled successfully!`);
+        await axios.delete(
+            `/api/rocket/${props.selectedRocket.id}/status/launched`
+        );
+        alert(`Rocket ${props.selectedRocket.id} cancelled successfully!`);
     } catch (error) {
-        console.error("Error cancelling rocket:", error);
+        console.error("Error", error);
         alert("Failed to cancel the rocket.");
     }
 };
