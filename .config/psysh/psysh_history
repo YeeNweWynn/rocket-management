@@ -11,3 +11,4 @@ $a->getWeather();
 $a->getWeather();
 $b = new App\Services\RocketSDK;
 $b->getRockets();
+exit;
