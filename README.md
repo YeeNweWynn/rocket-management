@@ -10,8 +10,9 @@
 
 	Before setting up the project, ensure you have the following installed:
 
-    - [Docker](https://www.docker.com/get-started)
-    - [Docker Compose](https://docs.docker.com/compose/install/)
+   	•	Docker
+	•	Docker Compose
+ 
 
 ## Development environment setup
     1. **Clone the Repository:**
