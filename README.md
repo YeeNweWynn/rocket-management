@@ -63,7 +63,8 @@ Ensure you have the following installed:
 
 ## Troubleshooting
 
-- **Database Connection:** Verify `.env` file settings.
+- **Database Connection:**
+  Verify `.env` file settings.
 - **File Permissions:**
 
     ```bash
