@@ -64,7 +64,9 @@ Ensure you have the following installed:
 ## Troubleshooting
 
 - **Database Connection:**
-  Verify `.env` file settings.
+
+      Verify `.env` file settings.
+  
 - **File Permissions:**
 
     ```bash
@@ -79,7 +81,7 @@ Ensure you have the following installed:
     docker-compose up -d
     ```
             
-## Number of Implemented User Scenarios
+## Implemented User Scenarios
 
     1.	User Registration: Users can create a new account by providing their details.
 	2.	User Login: Registered users can log in to their accounts using their email and password.
