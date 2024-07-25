@@ -10,57 +10,74 @@
 
 	Before setting up the project, ensure you have the following installed:
 
-   	•	Docker
-	•	Docker Compose
+   	• Docker
+	• Docker Compose
  
 
-## Development environment setup
-    1. **Clone the Repository:**
+## Development Environment Setup
 
-       ```bash
-       git clone [<repository-url>](https://github.com/YeeNweWynn/rocket-management.git)
-       cd <repository-directory>
+1. **Clone the Repository:**
 
-    2.	** Create a .env File:**
-        Copy the .env.example file to .env and modify it according to your environment
-         ```bash
-        cp .env.example .env
+    ```bash
+    git clone https://github.com/YeeNweWynn/rocket-management.git
+    cd rocket-management
+    ```
 
-    3. ** Build and Start Docker Containers:**
-         ```bash
-        docker-compose up -d
+2. **Create a .env File:**
+    Copy the `.env.example` file to `.env` and modify it according to your environment:
 
-    4. ** Install PHP Dependencies:**
-     ```bash
-        docker-compose exec laravel bash
-        composer install
-        
-    5. ** Install Node.js Dependencies:**
-        ```bash
-        docker-compose exec node bash
-        npm install
-        npm run dev    
+    ```bash
+    cp .env.example .env
+    ```
 
-    6. ** Run Laravel Migrations:**
-        ```bash
-      docker-compose exec laravel bash
-      php artisan migrate
+3. **Build and Start Docker Containers:**
 
-    7. ** Accessing the application:**
-        ```bash
-        http://localhost:8080
-        
+    ```bash
+    docker-compose up -d
+    ```
+
+4. **Install PHP Dependencies:**
+
+    ```bash
+    docker-compose exec laravel bash
+    composer install
+    ```
+
+5. **Install Node.js Dependencies:**
+
+    ```bash
+    docker-compose exec node bash
+    npm install
+    npm run dev
+    ```
+
+6. **Run Laravel Migrations:**
+
+    ```bash
+    docker-compose exec laravel bash
+    php artisan migrate
+    ```
+
+7. **Accessing the Application:**
+
+    Open [http://localhost:8080](http://localhost:8080) in your web browser.
+
 ## Troubleshooting
 
-	•	Database Connection: Verify .env file settings.
-	•	File Permissions:
-        ```bash
-            docker-compose exec laravel bash
-            chmod -R 775 storage
-    •	Rebuild Containers:
-        ```bash
-            docker-compose down
-            docker-compose up -d
+- **Database Connection:** Verify `.env` file settings.
+- **File Permissions:**
+
+    ```bash
+    docker-compose exec laravel bash
+    chmod -R 775 storage
+    ```
+
+- **Rebuild Containers:**
+
+    ```bash
+    docker-compose down
+    docker-compose up -d
+    ```
             
 ## Number of Implemented User Scenarios
 
