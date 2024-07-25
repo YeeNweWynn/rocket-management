@@ -7,11 +7,11 @@
    This README provides instructions on setting up and running the project using Docker.
 
 ## Prerequisites
-
-	Before setting up the project, ensure you have the following installed:
-
+ 
+     ```bash
    	• Docker
 	• Docker Compose
+     ```
  
 
 ## Development Environment Setup
