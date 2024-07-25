@@ -9,8 +9,8 @@
 ## Prerequisites
  
      ```bash
-   	• Docker
-	• Docker Compose
+       	• Docker
+    	• Docker Compose
      ```
  
 
