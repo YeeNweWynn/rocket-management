@@ -17,7 +17,7 @@ export default {
         return {
             menuItems: [
                 { name: "Rocket", link: "/dashboard" },
-                { name: "Settings", link: "/settings" },
+                { name: "Settings", link: "/user/profile" },
             ],
         };
     },

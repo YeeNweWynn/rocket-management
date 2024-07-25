@@ -18,7 +18,6 @@
                         </p>
                     </div>
                     <LoadingIndicator :isLoading="loading" />
-
                     <div
                         class="slide-menu flex overflow-x-scroll space-x-4"
                         v-if="!loading"
@@ -50,6 +49,7 @@
                 <RocketDetails
                     v-if="selectedRocket"
                     :selectedRocket="selectedRocket"
+                    :fetchRocketData="fetchRocketData"
                 />
             </div>
             <Weather />

@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Http;
 
 class WeatherSDKTest extends TestCase
 {
-    // use RefreshDatabase;
     public function testGetWeatherSuccess(): void
     {
         $weatherSDKMock = Mockery::mock(WeatherSDKInterface::class);

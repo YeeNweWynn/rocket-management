@@ -14,7 +14,7 @@
                     </p>
                     <p>
                         <strong>Status:</strong>
-                        {{ selectedRocket?.status }}
+                        {{ formatName(selectedRocket?.status) }}
                     </p>
                     <p>
                         <strong>Mass:</strong>
@@ -22,19 +22,19 @@
                     </p>
                     <p>
                         <strong>Altitude:</strong>
-                        {{ selectedRocket?.altitude }} m
+                        {{ selectedRocket?.altitude?.toFixed(2) }} m
                     </p>
                     <p>
                         <strong>Speed:</strong>
-                        {{ selectedRocket?.speed }} m/s
+                        {{ selectedRocket?.speed?.toFixed(2) }} m/s
                     </p>
                     <p>
                         <strong>Acceleration:</strong>
-                        {{ selectedRocket?.acceleration }} m/s²
+                        {{ selectedRocket?.acceleration?.toFixed(2) }} m/s²
                     </p>
                     <p>
                         <strong>Thrust:</strong>
-                        {{ selectedRocket?.thrust }} N
+                        {{ selectedRocket?.thrust?.toFixed(2) }} N
                     </p>
                     <p>
                         <strong>Temperature:</strong>
@@ -52,21 +52,14 @@
                         {{ selectedRocket?.payload?.weight }} kg
                     </p>
                 </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-bold">Telemetry</h3>
+                <div class="mt-4" v-if="selectedRocket?.status !== 'waiting'">
+                    <h3 class="text-lg font-bold">
+                        {{ formatName(selectedRocket?.status) }} At:
+                    </h3>
                     <p>
-                        <strong>Host:</strong>
-                        {{ selectedRocket?.telemetry?.host }}
-                    </p>
-                    <p>
-                        <strong>Port:</strong>
-                        {{ selectedRocket?.telemetry?.port }}
-                    </p>
-                </div>
-                <div class="mt-4" v-if="selectedRocket?.status === 'launched'">
-                    <h3 class="text-lg font-bold">Launched At:</h3>
-                    <p>
-                        {{ formatDate(selectedRocket?.timestamps?.launched) }}
+                        {{
+                            formatDateTime(selectedRocket?.timestamps?.launched)
+                        }}
                     </p>
                 </div>
                 <div class="mt-4 card-actions justify-center space-x-4">
@@ -78,7 +71,7 @@
                             selectedRocket?.status === 'deployed'
                         "
                         :loading="isLaunching"
-                        @click="updateStatus('launched')"
+                        @click="handleUpdateStatus('launched')"
                     >
                         Launch
                     </button>
@@ -90,13 +83,13 @@
                             isDeploying
                         "
                         :loading="isDeploying"
-                        @click="updateStatus('deployed')"
+                        @click="handleUpdateStatus('deployed')"
                     >
                         Deploy
                     </button>
                     <button
                         class="btn btn-wide btn-outline"
-                        @click="cancelRocket()"
+                        @click="handleCancelRocket()"
                     >
                         Cancel
                     </button>
@@ -107,8 +100,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { formatDate } from "@/Utils/dateUtils.js";
+import { ref, onUnmounted } from "vue";
+import { formatDateTime, formatName } from "@/Utils/dateUtils.js";
 import axios from "axios";
 
 const props = defineProps({
@@ -118,6 +111,7 @@ const props = defineProps({
 const isLaunching = ref(false);
 const isDeploying = ref(false);
 const isLaunched = ref(false);
+const pollingInterval = ref(null);
 
 const updateStatus = async (status) => {
     if (status === "launched") {
@@ -146,7 +140,7 @@ const updateStatus = async (status) => {
     }
 };
 
-const cancelRocket = async () => {
+const cancelRocket = async (status) => {
     try {
         await axios.delete(
             `/api/rocket/${props.selectedRocket.id}/status/launched`
@@ -157,4 +151,35 @@ const cancelRocket = async () => {
         alert("Failed to cancel the rocket.");
     }
 };
+
+const fetchRocketData = async () => {
+    try {
+        const response = await axios.get(`/api/rocket-overview`);
+        const rockets = response.data;
+
+        const selectedRocketData = rockets.find(
+            (rocket) => rocket.id === props.selectedRocket.id
+        );
+        console.log("selectedRocketData", selectedRocketData);
+        if (selectedRocketData) {
+            Object.assign(props.selectedRocket, selectedRocketData);
+        }
+    } catch (error) {
+        console.error("Error fetching latest rocket data:", error);
+    }
+};
+
+const handleUpdateStatus = async (status) => {
+    await updateStatus(status);
+    await fetchRocketData();
+};
+
+const handleCancelRocket = async () => {
+    await cancelRocket();
+    await fetchRocketData();
+};
+
+onUnmounted(() => {
+    clearInterval(pollingInterval.value);
+});
 </script>

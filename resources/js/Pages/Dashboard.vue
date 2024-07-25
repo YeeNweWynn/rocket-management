@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Sidebar from "@/Components/Sidebar.vue";
-import RocketOverview from "./RocketOverview.vue";
+import RocketOverview from "@/Pages/RocketOverview.vue";
 </script>
 
 <template>

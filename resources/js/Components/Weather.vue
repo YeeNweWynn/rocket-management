@@ -60,9 +60,7 @@ const location = "Bangkok, Thailand";
 const fetchWeatherData = async () => {
     try {
         const response = await axios.get("/api/weather");
-        console.log("Weather data:", response.data);
         weatherTimes.value = response.data;
-        console.log("fetchWeatherData", weatherTimes.value.temperature);
     } catch (error) {
         console.error("Error fetching weather data:", error);
     }
