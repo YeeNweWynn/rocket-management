@@ -3,7 +3,7 @@
 
 ## Introduction
 
-   This project was generated using Laravel Jetstream and Inertia.js  [ https://jetstream.laravel.com/introduction.html ]
+   This project was generated using Laravel Jetstream and Inertia.js  [ https://jetstream.laravel.com/introduction.html ].
    This README provides instructions on setting up and running the project using Docker.
 
 ## Prerequisites
