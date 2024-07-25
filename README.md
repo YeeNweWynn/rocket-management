@@ -8,10 +8,10 @@
 
 ## Prerequisites
  
-	Ensure you have the following installed:
+Ensure you have the following installed:
 
-    - [Docker](https://www.docker.com/get-started)
-    - [Docker Compose](https://docs.docker.com/compose/install/)
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Development Environment Setup
 
