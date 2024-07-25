@@ -87,11 +87,11 @@ Ensure you have the following installed:
 	2.	User Login: Registered users can log in to their accounts using their email and password.
 	3.	Profile Management: Users can update their profile information, including their name, email address, and password.
 	4.	Rocket Management:
-    	•	List Rockets: Display a list of all available rockets.
-    	•	Deploy Rocket: Prepare rockets for launch by initiating the deployment process.
-    	•	Launch Rocket: Launch a rocket that has been deployed.
-    	•	Cancel Rocket: Cancel a scheduled or in-progress rocket mission.
-        •	Check Status in Real-Time: Monitor the real-time status of rockets during deployment, launch, and mission phases.
+    	•List Rockets: Display a list of all available rockets.
+    	•Deploy Rocket: Prepare rockets for launch by initiating the deployment process.
+    	•Launch Rocket: Launch a rocket that has been deployed.
+    	•Cancel Rocket: Cancel a scheduled or in-progress rocket mission.
+        •Check Status in Real-Time: Monitor the real-time status of rockets during deployment, launch, and mission phases.
 	5.	Weather Feature: Provide weather information for rocket launches, including current conditions and forecasts.
 
         
